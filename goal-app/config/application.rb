@@ -18,5 +18,18 @@ module GoalApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.generators.system_tests = nil
+
+    config.generators do |g|
+      g.test_framework :rspec, #<-- Tells rails to use rspec for testing
+        :fixtures => false, # <-- Fixtures are rails default way of creating objects for testing, we will do this ourselves.
+        :view_specs => false,
+        :helper_specs => false,
+        :routing_specs => false,
+        :controller_specs => true,
+        :request_specs => false
+        g.fixture_replacement :factory_bot, :dir => "spec/factories"
+    end
   end
-end
+  end
+

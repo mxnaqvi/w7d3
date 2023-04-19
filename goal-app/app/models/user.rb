@@ -4,7 +4,7 @@ class User < ApplicationRecord
     validates :password_digest, presence: true
     validates :password, length: { minimum: 6 }, allow_nil: true
     
-    before_validation :ensure_session_token
+    before_validation :ensure_session_token!
 
     attr_accessor :password 
 
@@ -40,7 +40,7 @@ class User < ApplicationRecord
 
     end 
 
-    def reset_session_token
+    def reset_session_token!
 
         self.session_token = SecureRandom::urlsafe_base64
         self.save!
@@ -50,7 +50,7 @@ class User < ApplicationRecord
 
 
 
-    def ensure_session_token
+    def ensure_session_token!
 
     self.session_token ||= SecureRandom::urlsafe_base64
 
